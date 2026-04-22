@@ -1,0 +1,28 @@
+package pe.upc.smartpoolguardian.entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "Recomendacion")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Recomendacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int recomendacion_id;
+
+    @Column(name = "descripcion", nullable = false)
+    private String mensaje;
+
+    @ManyToOne
+    @JoinColumn(name = "evaluacion_id")
+    private Evaluacion evaluacion_id;
+
+}
