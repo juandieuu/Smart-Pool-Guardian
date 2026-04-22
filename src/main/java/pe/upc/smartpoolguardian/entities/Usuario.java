@@ -19,11 +19,11 @@ public class Usuario {
 
     @Column(name = "nombre_usuario", length = 50, nullable = false)
     private String nombre_usuario;
-    @Column(name = "contraseña", length = 100, nullable = false)
+    @Column(name = "contraseña", length = 50, nullable = false)
     private String contraseña;
-    @Column(name = "email", length = 100, nullable = false)
+    @Column(name = "email", length = 50, nullable = false)
     private String email;
-    @Column(name = "numero_celular", length = 11, nullable = false)
+    @Column(name = "numero_celular", length = 15, nullable = false)
     private String numero_celular;
 
 }
