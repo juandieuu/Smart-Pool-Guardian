@@ -53,22 +53,20 @@ public class PiscinaController {
         }
     }
 
-
-
     @PutMapping("/actualizar-piscinas")
     public ResponseEntity<String>actualizarPiscinas(@RequestBody @Valid PiscinaDTO dto){
         Optional<Piscina>existente = pS.listId(dto.getPiscina_id());
-        Piscina p = new Piscina();
-        p.setPiscina_id(dto.getPiscina_id());
+        Piscina p = existente.get();
         p.setNombre_piscina(dto.getNombre_piscina());
         p.setVolumen(dto.getVolumen());
         pS.update(p);
         return ResponseEntity.ok("Se ha actualizado correctamente");
     }
+
     @PutMapping("/eliminar-piscina")
     public ResponseEntity<String>eliminarPiscinas(@RequestBody @Valid PiscinaDTO dto){
         Optional<Piscina>existente = pS.listId(dto.getPiscina_id());
-        Piscina p = new Piscina();
+        Piscina p = existente.get();
         p.setEliminado(true);
         pS.update(p);
         return ResponseEntity.ok("Se ha eliminado correctamente");
