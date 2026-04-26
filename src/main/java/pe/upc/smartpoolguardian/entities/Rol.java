@@ -1,6 +1,7 @@
 package pe.upc.smartpoolguardian.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,13 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rol_id;
 
+    @NotBlank
     @Column(name = "tipo_rol", length = 30, nullable = false)
     private String tipo_rol;
+/*
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario_id;
+
+ */
 }

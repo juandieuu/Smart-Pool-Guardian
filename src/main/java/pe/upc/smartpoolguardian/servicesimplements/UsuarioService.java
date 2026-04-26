@@ -42,7 +42,9 @@ public class UsuarioService implements IUsuarioService {
         if (!usuarioRepository.existsById(id)) {
             throw new RuntimeException("Usuario no encontrado");
         }
-        usuarioRepository.deleteById(id);
+        else {
+            usuarioRepository.deleteById(id);
+        }
 
 
     }
