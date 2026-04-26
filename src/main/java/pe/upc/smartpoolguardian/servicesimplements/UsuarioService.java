@@ -36,12 +36,15 @@ public class UsuarioService implements IUsuarioService {
         existe.setNumero_celular(usuario.getNumero_celular());
         return usuarioRepository.save(existe);
     }
-
+/*
     @Override
     public void borrarUsuarioPorId(int id) {
         if (!usuarioRepository.existsById(id)) {
             throw new RuntimeException("Usuario no encontrado");
         }
         usuarioRepository.deleteById(id);
+
+
     }
+*/
 }
