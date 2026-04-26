@@ -62,10 +62,12 @@ public class UsuarioController {
         );
         return ResponseEntity.ok(response);
     }
-
+/*
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarUsuarioPorId (@PathVariable int id){
         usuarioService.borrarUsuarioPorId(id);
         return ResponseEntity.noContent().build();
     }
+
+ */
 }
