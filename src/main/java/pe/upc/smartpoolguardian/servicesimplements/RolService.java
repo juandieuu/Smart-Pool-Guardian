@@ -25,10 +25,10 @@ public class RolService implements IRolService {
 
     @Override
     public Rol actualizarRol(Rol rol) {
-        Rol existe = rolRepository.findById(rol.getRol_id()).
+        Rol existe = rolRepository.findById(rol.getRolId()).
                 orElseThrow(() -> new RuntimeException("Rol no encontrado"));
 
-        existe.setTipo_rol(rol.getTipo_rol());
+        existe.setTipoRol(rol.getTipoRol());
         return rolRepository.save(existe);
     }
 

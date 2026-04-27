@@ -9,10 +9,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class RolRequestDTO {
-    @NotBlank
+@AllArgsConstructor
+public class PiscinaResponseDTO {
     @NotNull
-    private String tipoRol;
+    private int piscinaId;
+    @NotNull
+    @NotBlank
+    private String nombrePiscina;
+    @NotNull
+    private double volumen;
+    @NotNull
+    private int usuarioId;
 }

@@ -8,11 +8,11 @@ import lombok.Setter;
 @Setter
 public class UsuarioRequestDTO {
     @NotBlank
-    private String nombre_usuario;
+    private String nombreUsuario;
     @NotBlank
     private String password;
     @NotBlank
     private String email;
     @NotBlank
-    private String numero_celular;
+    private String numeroCelular;
 }

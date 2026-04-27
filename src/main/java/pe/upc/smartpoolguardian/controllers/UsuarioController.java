@@ -22,18 +22,18 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO dto) {
         //De DTORequest a Entity
         Usuario usuario = new Usuario();
-        usuario.setNombre_usuario(dto.getNombre_usuario());
+        usuario.setNombreUsuario(dto.getNombreUsuario());
         usuario.setPassword(dto.getPassword());
         usuario.setEmail(dto.getEmail());
-        usuario.setNumero_celular(dto.getNumero_celular());
+        usuario.setNumeroCelular(dto.getNumeroCelular());
 
         Usuario nuevo_usuario = usuarioService.registrarUsuario(usuario);
 
         // De Entity a DTOResponse
         UsuarioResponseDTO response = new UsuarioResponseDTO(
-                nuevo_usuario.getNombre_usuario(),
+                nuevo_usuario.getNombreUsuario(),
                 nuevo_usuario.getEmail(),
-                nuevo_usuario.getNumero_celular()
+                nuevo_usuario.getNumeroCelular()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -47,18 +47,18 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> actualizarUsuario (@PathVariable int id, @RequestBody @Valid UsuarioRequestDTO dto){
         Usuario usuario = new Usuario();
-        usuario.setUsuario_id(id);
-        usuario.setNombre_usuario(dto.getNombre_usuario());
+        usuario.setUsuarioId(id);
+        usuario.setNombreUsuario(dto.getNombreUsuario());
         usuario.setPassword(dto.getPassword());
         usuario.setEmail(dto.getEmail());
-        usuario.setNumero_celular(dto.getNumero_celular());
+        usuario.setNumeroCelular(dto.getNumeroCelular());
 
         Usuario actualizado = usuarioService.editarUsuario(usuario);
 
         UsuarioResponseDTO response = new UsuarioResponseDTO(
-                actualizado.getNombre_usuario(),
+                actualizado.getNombreUsuario(),
                 actualizado.getEmail(),
-                actualizado.getNumero_celular()
+                actualizado.getNumeroCelular()
         );
         return ResponseEntity.ok(response);
     }

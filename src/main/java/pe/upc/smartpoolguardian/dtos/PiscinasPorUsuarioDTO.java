@@ -1,5 +1,6 @@
 package pe.upc.smartpoolguardian.dtos;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -7,12 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class RolRequestDTO {
-    @NotBlank
-    @NotNull
-    private String tipoRol;
+@JsonPropertyOrder({"piscinaId, nombrePiscina, volumen"})
+public interface PiscinasPorUsuarioDTO {
+    int getPiscinaId();
+    String getNombrePiscina();
+    double getVolumen();
 }

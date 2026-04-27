@@ -18,19 +18,19 @@ public class Evaluacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer evaluacion_id;
+    private Integer evaluacionId;
 
     @Column(name = "estado_general", nullable = false)
-    private String estado_general;
+    private String estadoGeneral;
 
     @Column(name = "fecha_creacion", nullable = false)
-    private LocalDate fecha_creacion;
+    private LocalDate fechaCreacion;
 
     @Column(name = "diagnostico", nullable = false)
     private String diagnostico;
 
     @OneToOne
     @JoinColumn(name = "medicion_id")
-    private Medicion medicion_id;
+    private Medicion medicion;
 
 }

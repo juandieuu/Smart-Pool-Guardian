@@ -20,7 +20,7 @@ public class RolController {
     @PostMapping
     public ResponseEntity<Rol> crearRol(@RequestBody @Valid RolRequestDTO dto) {
         Rol nuevo = new Rol();
-        nuevo.setTipo_rol(dto.getTipoRol());
+        nuevo.setTipoRol(dto.getTipoRol());
 
         Rol creado = rolService.crearRol(nuevo);
 
@@ -35,8 +35,8 @@ public class RolController {
     @PutMapping("/{id}")
     public ResponseEntity<Rol> actualizarRol(@PathVariable int id, @RequestBody @Valid RolRequestDTO dto) {
         Rol nuevo = new Rol();
-        nuevo.setRol_id(id);
-        nuevo.setTipo_rol(dto.getTipoRol());
+        nuevo.setRolId(id);
+        nuevo.setTipoRol(dto.getTipoRol());
         Rol creado = rolService.actualizarRol(nuevo);
         return ResponseEntity.ok(creado);
     }
@@ -46,5 +46,5 @@ public class RolController {
         rolService.eliminarRolPorId(id);
         return ResponseEntity.noContent().build();
     }
-    
+
 }
