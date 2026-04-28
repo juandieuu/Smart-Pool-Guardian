@@ -29,6 +29,8 @@ public class Usuario {
     @NotBlank
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+    @Column(name = "eliminado", nullable = false)
+    private boolean eliminado;
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numeroCelular;
