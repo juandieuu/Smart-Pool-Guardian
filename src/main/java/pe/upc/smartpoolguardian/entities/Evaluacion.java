@@ -20,13 +20,13 @@ public class Evaluacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer evaluacionId;
 
-    @Column(name = "estado_general", length = 50, nullable = false)
+    @Column(name = "estado_general", nullable = false)
     private String estadoGeneral;
 
     @Column(name = "fecha_creacion", nullable = false)
     private LocalDate fechaCreacion;
 
-    @Column(name = "diagnostico",length = 150, nullable = false)
+    @Column(name = "diagnostico", length = 255 ,nullable = false)
     private String diagnostico;
 
     @OneToOne
