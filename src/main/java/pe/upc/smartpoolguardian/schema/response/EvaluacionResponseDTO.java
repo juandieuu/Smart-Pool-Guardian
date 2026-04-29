@@ -9,6 +9,5 @@ import java.time.LocalDate;
 @Setter
 public class EvaluacionResponseDTO {
     private String estadoGeneral;
-    private LocalDate fechaCreacion;
     private String diagnostico;
 }
