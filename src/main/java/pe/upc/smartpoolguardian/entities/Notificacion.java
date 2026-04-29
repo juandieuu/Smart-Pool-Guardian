@@ -1,5 +1,6 @@
 package pe.upc.smartpoolguardian.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class Notificacion {
     @Column(name = "hora_creacion", nullable = false)
     private LocalTime horaCreacion;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

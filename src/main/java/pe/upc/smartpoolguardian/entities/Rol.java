@@ -1,5 +1,6 @@
 package pe.upc.smartpoolguardian.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rolId;
 
+    @JsonBackReference
     @NotBlank
     @Column(name = "tipo_rol", length = 30, nullable = false)
     private String tipoRol;

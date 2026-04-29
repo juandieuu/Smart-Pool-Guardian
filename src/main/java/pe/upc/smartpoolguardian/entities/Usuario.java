@@ -1,5 +1,6 @@
 package pe.upc.smartpoolguardian.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,10 +40,12 @@ public class Usuario {
     private Rol rol;
 
     //RELACION BIDIRECCIONAL A PISCINA
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Piscina> piscinas;
 
     //RELACION BIDIRECCIONAL A NOTIFICACIONES
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Notificacion> notificaciones;
 
