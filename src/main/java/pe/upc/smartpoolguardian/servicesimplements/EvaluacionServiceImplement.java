@@ -24,4 +24,9 @@ public class EvaluacionServiceImplement implements IEvaluacionService {
     public Optional<Evaluacion> filtrarEvaluacion(String estadoG, String diagnostico, LocalDate fecha) {
         return eR.filtrarEvaluacion(estadoG,diagnostico,fecha);
     }
+
+    @Override
+    public Evaluacion buscarEvaluacionPorId(int id) {
+        return eR.findById(id).orElseThrow(()->new RuntimeException("No se encontro el id"));
+    }
 }
