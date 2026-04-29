@@ -13,7 +13,6 @@ import pe.upc.smartpoolguardian.entities.Piscina;
 import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.servicesimplements.PiscinaService;
 import pe.upc.smartpoolguardian.servicesimplements.UsuarioService;
-
 import java.util.List;
 
 @RestController
@@ -93,7 +92,7 @@ public class PiscinaController {
 
     @DeleteMapping("/{idUsuario}/{idPiscina}")
     public ResponseEntity<Void> eliminarPiscina(@PathVariable int idUsuario,
-                                                              @PathVariable int idPiscina) {
+                                                @PathVariable int idPiscina) {
         //Verificar si existe usuario
         Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
 
