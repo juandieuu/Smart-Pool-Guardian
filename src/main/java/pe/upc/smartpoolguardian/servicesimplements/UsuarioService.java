@@ -15,11 +15,13 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario registrarUsuario(Usuario usuario) {
+
         return usuarioRepository.save(usuario);
     }
 
     @Override
     public List<Usuario> mostrarUsuarios() {
+
         return usuarioRepository.findAll();
     }
 
@@ -32,6 +34,7 @@ public class UsuarioService implements IUsuarioService {
         existe.setPassword(usuario.getPassword());
         existe.setEmail(usuario.getEmail());
         existe.setNumeroCelular(usuario.getNumeroCelular());
+        existe.setRol(usuario.getRol());
         return usuarioRepository.save(existe);
     }
 
