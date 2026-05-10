@@ -18,9 +18,9 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+    private JwtUserDetailsService jwtUserDetailsService;//Los detalles de usuario del token
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtTokenUtil jwtTokenUtil;//Es el que maneja todo el token
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -28,6 +28,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String requestTokenHeader = request.getHeader("Authorization");//Se obtiene el header con el token
         String username = null;
         String jwtToken = null;
+
+        System.out.println(requestTokenHeader);
 
         //Se valida si se ha recibido un token
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {

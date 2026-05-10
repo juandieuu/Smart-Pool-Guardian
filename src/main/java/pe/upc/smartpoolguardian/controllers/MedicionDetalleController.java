@@ -38,7 +38,7 @@ public class MedicionDetalleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/buscar-id/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
 
         Optional<DetalleMedicion> detalle = mdS.buscarDetallePorId(id);
