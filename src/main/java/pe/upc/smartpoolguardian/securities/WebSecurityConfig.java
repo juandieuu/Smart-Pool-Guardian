@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 @EnableMethodSecurity//Activa anotaciones que comprueba por roles como @PreAuthorize("hasRole('ADMIN')"), @Secured("ROLE_ADMIN")
 public class WebSecurityConfig {
 
-    //Manejador de errores
+    //Manejador de errores rechazo de autenticacion
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -69,7 +70,30 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)//Desactiva el CSRF ya que no lo usaremos
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login").permitAll()//Aqui excluye el endpoint login de los endpoints privados
+                        //.requestMatchers("/login").permitAll()//Aqui excluye el endpoint login de los endpoints privados
+
+                        //Pag publicas
+                        .requestMatchers(
+                                "/login",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
+
+                        //Registro de usuarios
+                        .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+
+                        //Permisos ADMIN
+                        .requestMatchers(
+                                "/api/evaluacion/evaluacion-filtro/**"
+                        ).hasAnyRole("DEV", "ADMIN")
+
+                        //Permisos DEV
+                        .requestMatchers(
+                                "/api/roles/**",
+                                "/api/usuarios/eliminar"
+                        ).hasAnyRole("DEV")
+
                         .anyRequest().authenticated()//Aca indica que cualquier otro endpoint es por autenticacion
                 )
                 .httpBasic(Customizer.withDefaults())//Segun gpt esto no sirve xd

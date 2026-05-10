@@ -21,7 +21,7 @@ public class JwtTokenUtil{
 
     private static final long TOKEN_VALIDITY = 2 * 60 * 60 * 1000; // 2 horas
 
-    @Value("${jwt.secret}")
+    @Value("66f6f3b202b1ce7b818f76f952973a4a9589a619cb63bee2b43c365b9276f6781e1a7ac1f5988bb5aca0f8452d855992e03d09c2a79186af7042752eb1e7aa06")
     private String secret;
 
     //Decode al token para obtener el username

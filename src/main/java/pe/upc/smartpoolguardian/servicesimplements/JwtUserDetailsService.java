@@ -21,7 +21,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = repo.findOneByUsername(username);
+        Usuario user = repo.findOneByNombreUsuario(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("El usuario no existe", username));
@@ -33,7 +33,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         roles.add(new SimpleGrantedAuthority(user.getRol().getTipoRol()));
 
         //Se devuelve el detalle de usuario
-        UserDetails ud = new org.springframework.security.core.userdetails.User(user.getNombreUsuario(), user.getPassword(), user.getEliminado(), true, true, true, roles);
+        UserDetails ud = new org.springframework.security.core.userdetails.User(user.getNombreUsuario(), user.getPassword(), user.getActivo(), true, true, true, roles);
 
         return ud;
     }
