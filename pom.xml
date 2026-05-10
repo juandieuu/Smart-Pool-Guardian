@@ -37,6 +37,11 @@
             <version>3.2.6</version>
             <scope>compile</scope>
         </dependency>
+         <dependency>
+             <groupId>org.projectlombok</groupId>
+             <artifactId>lombok</artifactId>
+             <optional>true</optional>
+         </dependency>
         <!-- DEPENDENCIA PARA @VALID -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
