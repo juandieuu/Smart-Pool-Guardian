@@ -87,7 +87,11 @@ public class WebSecurityConfig {
                         .requestMatchers(
                                 "/api/evaluacion/evaluacion-filtro/**",
                                 "/api/detalles-medicion/promedio-nivel-ph-piscina",
-                                "/api/detalles-medicion/piscina-con-temperaturas-mas-altas"
+                                "/api/detalles-medicion/piscina-con-temperaturas-mas-altas",
+                                "/api/mediciones/obtener-tipo-mediciones-por-piscina",
+                                "/api/mediciones/prediccion-algas/**",
+                                "/api/recomendaciones/recomendaciones-por-evaluaciones-criticas/",
+                                "/api/usuarios/reporte-usuarios-inactivos"
                         ).hasAnyRole("DEV", "ADMIN")
 
                         //Permisos DEV

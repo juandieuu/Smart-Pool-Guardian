@@ -21,8 +21,13 @@ public class EvaluacionServiceImplement implements IEvaluacionService {
     }
 
     @Override
-    public Optional<Evaluacion> filtrarEvaluacion(String estadoG, String diagnostico, LocalDate fecha) {
-        return eR.filtrarEvaluacion(estadoG,diagnostico,fecha);
+    public void RegistrarEvaluacion(Evaluacion evaluacion) {
+        eR.save(evaluacion);
+    }
+
+    @Override
+    public List<Evaluacion> filtrarEvaluacion(String estadoG, LocalDate fecha) {
+        return eR.filtrarEvaluacion(estadoG,fecha);
     }
 
     @Override
