@@ -7,11 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Medicion;
+import pe.upc.smartpoolguardian.entities.Piscina;
 import pe.upc.smartpoolguardian.schema.dtos.MedicionDTO;
 import pe.upc.smartpoolguardian.schema.dtos.PrediccionAlgasDTO;
+import pe.upc.smartpoolguardian.schema.response.MedPorTipoResponseDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,14 +35,10 @@ public class MedicionController {
         //ENCONTRAR PISCINA
         var piscinaOpt = pS.buscarPiscinaPorId(dto.getIdPiscina());
 
-        if (piscinaOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No hay una piscina creada con esa id.");
-        }
         //DE DTO A ENTITY
         Medicion medicion = new Medicion();
         medicion.setFechaMedicion(dto.getFechaMedicion());
-        medicion.setPiscina(piscinaOpt.get());
+        medicion.setPiscina(piscinaOpt);
 
         //CREAR MEDICION
         Medicion registro = mS.crearMedicion(medicion);
@@ -53,6 +53,10 @@ public class MedicionController {
 
     @GetMapping("/listar/{idPiscina}")
     public ResponseEntity<?> listarPorPiscina(@PathVariable int idPiscina) {
+
+        Piscina piscina = pS.buscarPiscinaPorId(idPiscina);
+
+        if (piscina.isEliminado()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La piscina esta eliminado no puedes ver sus mediciones.");
 
         List<MedicionDTO> mediciones = mS.listarMedicionesPorPiscina(idPiscina).stream()
                 .map( x -> m.map(x, MedicionDTO.class)).toList();
@@ -76,5 +80,29 @@ public class MedicionController {
         }
 
         return new ResponseEntity<>(alertas, HttpStatus.OK);
+    }
+
+    @GetMapping("/obtener-tipo-mediciones-por-piscina/{idPiscina}/{tipo}")
+    public ResponseEntity<?> medicionesPorTipoYPiscina(
+            @PathVariable("idPiscina") Integer idPiscina,
+            @PathVariable("tipo") String tipo
+    ) {
+        List<Object[]> lista = mS.ObtenerMedicionesDeUnTipoPorPiscina(idPiscina, tipo);
+
+        if(lista.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay mediciones existentes");
+        }
+
+        List<MedPorTipoResponseDTO> response = new ArrayList<>();
+        for(Object[] fila : lista){
+            MedPorTipoResponseDTO dto = new MedPorTipoResponseDTO();
+            dto.setPiscina_id(((Number)fila[0]).intValue());
+            dto.setNombre_piscina(((String)fila[1]));
+            dto.setFecha_meicion(((LocalDate)fila[2]));
+            dto.setTipo_medicion(((String)fila[3]));
+            response.add(dto);
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

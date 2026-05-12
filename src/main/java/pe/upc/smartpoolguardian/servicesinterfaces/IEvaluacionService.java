@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface IEvaluacionService {
     public List<Evaluacion> list();
-    Optional<Evaluacion> filtrarEvaluacion(String estadoG, String diagnostico, LocalDate fecha);
+    public void RegistrarEvaluacion(Evaluacion evaluacion);
+    List<Evaluacion> filtrarEvaluacion(String estadoG, LocalDate fecha);
     public Evaluacion buscarEvaluacionPorId(int id);
 }
